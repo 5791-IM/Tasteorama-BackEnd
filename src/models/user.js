@@ -15,6 +15,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
+    savedRecipes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'recipes',
+      },
+    ],
   },
   {
     timestamps: true,
