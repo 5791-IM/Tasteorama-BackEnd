@@ -10,6 +10,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 import authRouter from './routers/auth.js';
 import usersRouter from './routers/usersRouter.js';
+import categoriesRouter from './routers/categories.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -42,6 +43,7 @@ export const startServer = () => {
 
   app.use('/api/auth', authRouter);
   app.use('/api/users', usersRouter);
+  app.use('/api/categories', categoriesRouter);
 
   app.use(notFoundHandler);
 
