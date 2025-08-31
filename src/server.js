@@ -11,6 +11,8 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routers/auth.js';
 import usersRouter from './routers/usersRouter.js';
 import categoriesRouter from './routers/categories.js';
+import ingredientsRouter from './routers/ingredients.js';
+import recipesRouter from './routers/recipes.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -44,6 +46,9 @@ export const startServer = () => {
   app.use('/api/auth', authRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/categories', categoriesRouter);
+  app.use('/api/ingredients', ingredientsRouter);
+  app.use('/api/recipes/search', recipesRouter);
+  app.use('/api/recipes', recipesRouter);
 
   app.use(notFoundHandler);
 
