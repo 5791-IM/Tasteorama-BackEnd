@@ -37,7 +37,10 @@ const recipeSchema = new mongoose.Schema(
           ref: 'ingredients',
           required: true,
         },
-        measure: { type: String },
+        measure: {
+          type: String,
+          required: true,
+        },
       },
     ],
   },

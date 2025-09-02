@@ -49,6 +49,7 @@ export const startServer = () => {
   app.use('/api/ingredients', ingredientsRouter);
   app.use('/api/recipes/search', recipesRouter);
   app.use('/api/recipes', recipesRouter);
+  app.use('/api/recipes', recipesRouter);
 
   app.use(notFoundHandler);
 
