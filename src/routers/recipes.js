@@ -5,12 +5,17 @@ import { getRecipeByIdController } from '../controllers/recipesById.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { addRecipeSchema } from '../validation/recipes.js';
-import { addRecipeController } from '../controllers/recipes.js';
+import {
+  addRecipeController,
+  getOwnRecipesController,
+} from '../controllers/recipes.js';
 
 const recipesRouter = Router();
 
 recipesRouter.get('/', ctrlWrapper(searchRecipesController));
+recipesRouter.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 recipesRouter.get('/:id', ctrlWrapper(getRecipeByIdController));
+
 recipesRouter.post(
   '/',
   authenticate,
