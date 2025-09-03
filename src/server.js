@@ -13,6 +13,7 @@ import usersRouter from './routers/usersRouter.js';
 import categoriesRouter from './routers/categories.js';
 import ingredientsRouter from './routers/ingredients.js';
 import recipesRouter from './routers/recipes.js';
+import favoritesRouter from './routers/favorites.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -49,7 +50,8 @@ export const startServer = () => {
   app.use('/api/ingredients', ingredientsRouter);
   app.use('/api/recipes/search', recipesRouter);
   app.use('/api/recipes', recipesRouter);
-  app.use('/api/recipes', recipesRouter);
+  // app.use('/api/recipes', recipesRouter);
+  app.use('/api/recipes/favorites', favoritesRouter);
 
   app.use(notFoundHandler);
 
