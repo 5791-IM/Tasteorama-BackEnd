@@ -6,16 +6,25 @@ import {
   registerUser,
 } from '../services/auth.js';
 
-export const registerController = async (req, res) => {
-  const user = await registerUser(req.body);
+export const registerController = async (req, res, next) => {
+  try {
+    const user = await registerUser(req.body);
 
-  const { password, ...userData } = user.toObject();
+    const session = await loginUser({
+      email: user.email,
+      password: req.body.password,
+    });
 
-  res.status(201).json({
-    status: 201,
-    message: 'Successfully registered a user!',
-    data: userData,
-  });
+    setupSession(res, session);
+
+    res.status(201).json({
+      status: 201,
+      message: 'Successfully registered a user!',
+      data: { user, token: session.accessToken },
+    });
+  } catch (error) {
+    next(error); // отправляем в errorHandler
+  }
 };
 
 export const loginController = async (req, res) => {

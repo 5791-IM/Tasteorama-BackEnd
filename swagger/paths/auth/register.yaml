@@ -1,0 +1,61 @@
+tags:
+  - Auth
+summary: Register a new user
+operationId: registerUser
+description: Register an account and returns user info with JWT token
+security: [] # публичный эндпоинт
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - email
+          - password
+        properties:
+          name:
+            description: Username
+            type: string
+            example: Eva
+          email:
+            description: User's email
+            type: string
+            example: eva@example.com
+          password:
+            description: User's password
+            type: string
+            example: 1234qwerty
+responses:
+  '201':
+    description: Successfully registered a user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully registered a user!
+            data:
+              type: object
+              properties:
+                user:
+                  $ref: '../../components/schemas/users/user.yaml'
+                token:
+                  type: string
+                  example: o1ZCk0CFZLfVycC3TVyqsP4YiO9QL74ybEwKpElY
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '409':
+    $ref: '../../components/responses/409.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

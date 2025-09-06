@@ -1,0 +1,97 @@
+# docs/openapi.yaml
+
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Tasteorama app
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of tasteorama app
+tags:
+  - name: Auth
+    description: Authentication operations (register, login, refresh).
+  - name: Users
+    description: Users operations (get current user info).
+  - name: Categories
+    description: Categories operations (getAll).
+  - name: Ingredients
+    description: Ingredients operations (getAll).
+  - name: Recipes
+    description: Recipes operations (search, getById, own, favorites, create).
+
+servers:
+  - url: http://127.0.0.1:3000/api
+  - url: https://tasteorama-backend-kykf.onrender.com
+paths:
+  # === Auth endpoints ===
+  /auth/register:
+    post:
+      $ref: ../swagger/paths/auth/register.yaml
+
+  /auth/login:
+    post:
+      $ref: ../swagger/paths/auth/login.yaml
+
+  /auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout.yaml
+
+  /auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh.yaml
+
+  /auth/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/send-reset-email.yaml
+
+  /auth/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-pwd.yaml
+
+  # === User endpoints ===
+  /users/current:
+    get:
+      $ref: ../swagger/paths/users/current/get.yaml
+
+  # === Categories endpoints ===
+  /categories:
+    get:
+      $ref: ../swagger/paths/category/get.yaml
+
+  # === Ingredients endpoints ===
+  /ingredients:
+    get:
+      $ref: ../swagger/paths/ingredients/get.yaml
+
+  # === Recipe endpoints ===
+  /recipes:
+    get:
+      $ref: ../swagger/paths/recipes/get.yaml
+
+    post:
+      $ref: ../swagger/paths/recipes/post.yaml
+
+  /recipes/{id}:
+    get:
+      $ref: ../swagger/paths/recipes/{id}/get.yaml
+
+  /recipes/own:
+  get:
+    $ref: ../swagger/paths/recipes/own/get.yaml
+
+  /recipes/favorites:
+    get:
+      $ref: ../swagger/paths/recipes/favorite/get.yaml
+
+  /recipes/favorites/{recipeId}:
+    post:
+      $ref: ../swagger/paths/recipes/favorite/{recipeId}/post.yaml
+
+    delete:
+      $ref: ../swagger/paths/recipes/favorite/{recipeId}/delete.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
